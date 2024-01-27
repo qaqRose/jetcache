@@ -279,6 +279,7 @@ public interface Cache<K, V> extends Closeable {
     }
 
     /**
+     * 大写API的返回比较丰富，可以用于业务判断
      * Gets an entry from the cache.
      * <p>if the implementation supports asynchronous operation, the cache access may not completed after this method
      * return. The invoke of getResultCode()/isSuccess()/getMessage()/getValue() on the result will block until cache

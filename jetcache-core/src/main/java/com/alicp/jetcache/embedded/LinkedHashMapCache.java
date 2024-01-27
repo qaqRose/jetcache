@@ -13,6 +13,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
+ * 自己实现的内存hashMap缓存容器
  * @author huangli
  */
 public class LinkedHashMapCache<K, V> extends AbstractEmbeddedCache<K, V> {

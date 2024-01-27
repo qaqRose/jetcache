@@ -7,5 +7,16 @@ package com.alicp.jetcache;
  * @author huangli
  */
 public enum CacheResultCode {
-    SUCCESS, PART_SUCCESS, FAIL, NOT_EXISTS, EXISTS, EXPIRED
+    /**
+     * 请求成功
+     */
+    SUCCESS,
+    PART_SUCCESS,
+    FAIL,
+    /**
+     * 数据不存在
+     */
+    NOT_EXISTS,
+    EXISTS,
+    EXPIRED
 }

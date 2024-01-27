@@ -22,7 +22,16 @@ public class CacheResult {
     public static final CacheResult FAIL_ILLEGAL_ARGUMENT = new CacheResult(CacheResultCode.FAIL, MSG_ILLEGAL_ARGUMENT);
     public static final CacheResult EXISTS_WITHOUT_MSG = new CacheResult(CacheResultCode.EXISTS, null);
 
+    /**
+     * result code 枚举，方便业务判断调用失败还是不存在
+     */
     private volatile CacheResultCode resultCode;
+
+    /**
+     * 失败信息
+     * 失败时是
+     * @see MSG_ILLEGAL_ARGUMENT
+     */
     private volatile String message;
     private final CompletionStage<ResultData> future;
 

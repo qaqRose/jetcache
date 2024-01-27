@@ -9,10 +9,7 @@ import com.alicp.jetcache.CacheResultCode;
 import com.alicp.jetcache.VirtualThreadUtil;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.cglib.core.ReflectUtils;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,11 +23,13 @@ public class LinkedHashMapCacheTest extends AbstractEmbeddedCacheTest {
 
     @Override
     protected Function<CacheConfig, Cache> getBuildFunc() {
+        // 构造缓存
         return (c) -> new LinkedHashMapCache((EmbeddedCacheConfig) c);
     }
 
     @Test
     public void test() throws Exception {
+        // 入口
         super.test(100, true);
     }
 

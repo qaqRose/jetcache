@@ -11,7 +11,17 @@ import java.util.function.Function;
  */
 public abstract class AbstractCacheBuilder<T extends AbstractCacheBuilder<T>> implements CacheBuilder, Cloneable {
 
+    /**
+     * 缓存配置
+     */
     protected CacheConfig config;
+
+
+    /**
+     * 缓存构造方法
+     * 使用函数式
+     * 又外部实现，builder负责执行
+     */
     private Function<CacheConfig, Cache> buildFunc;
 
     public abstract CacheConfig getConfig();
@@ -33,12 +43,19 @@ public abstract class AbstractCacheBuilder<T extends AbstractCacheBuilder<T>> im
         return buildCache();
     }
 
+    /**
+     * 构造cache 核心流程
+     * @return
+     * @param <K> key
+     * @param <V> value
+     */
     @Override
     public final <K, V> Cache<K, V> buildCache() {
         if (buildFunc == null) {
             throw new CacheConfigException("no buildFunc");
         }
         beforeBuild();
+        // 深拷贝
         CacheConfig c = getConfig().clone();
         Cache<K, V> cache = buildFunc.apply(c);
         if (c.getLoader() != null) {

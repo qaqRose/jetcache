@@ -15,6 +15,11 @@ import java.util.function.Function;
 public class CacheConfig<K, V> implements Cloneable {
     private long expireAfterWriteInMillis = CacheConsts.DEFAULT_EXPIRE * 1000L;
     private long expireAfterAccessInMillis = 0;
+
+    /**
+     * 键转换器
+     * 可以陪 fastjson
+     */
     private Function<K, Object> keyConvertor;
 
     private CacheLoader<K, V> loader;
@@ -34,11 +39,15 @@ public class CacheConfig<K, V> implements Cloneable {
     private boolean cachePenetrationProtect = false;
     private Duration penetrationProtectTimeout = null;
 
+    /**
+     * 浅拷贝实现
+     */
     @Override
     public CacheConfig clone() {
         try {
             CacheConfig copy = (CacheConfig) super.clone();
             if (monitors != null) {
+                // monitor 还是是同一个引用
                 copy.monitors = new ArrayList(this.monitors);
             }
             if (refreshPolicy != null) {

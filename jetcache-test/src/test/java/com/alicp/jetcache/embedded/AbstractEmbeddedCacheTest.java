@@ -38,11 +38,21 @@ public abstract class AbstractEmbeddedCacheTest extends AbstractCacheTest {
         Assert.assertEquals(CacheResultCode.SUCCESS, cache.GET("K3").getResultCode());
     }
 
+    /**
+     *
+     * @param expireMillis  配置超时
+     * @param testLru  lru测试
+     */
     public void test(int expireMillis, boolean testLru) throws Exception {
         cache = EmbeddedCacheBuilder.createEmbeddedCacheBuilder()
-                .buildFunc(getBuildFunc()).expireAfterWrite(expireMillis, TimeUnit.MILLISECONDS).limit(200).buildCache();
+                .buildFunc(getBuildFunc())
+                .expireAfterWrite(expireMillis, TimeUnit.MILLISECONDS)
+                .limit(200)
+                .buildCache();  // 获取cache
         baseTest();
+
         expireAfterWriteTest(cache.config().getExpireAfterWriteInMillis());
+
         if (testLru) {
             cache = EmbeddedCacheBuilder.createEmbeddedCacheBuilder()
                     .buildFunc(getBuildFunc()).expireAfterWrite(expireMillis, TimeUnit.MILLISECONDS).limit(2).buildCache();
